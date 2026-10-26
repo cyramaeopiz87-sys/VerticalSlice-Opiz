@@ -63,16 +63,19 @@ VerticalSlice/
 │       │       ├── GetCourseByIdQuery.cs
 │       │       ├── GetCourseByIdQueryHandler.cs
 │       │       └── GetCourseByIdResponse.cs
-│       └── Admissions/
+│       └── Admissions/ 
 │           ├── CreateAdmission/
 │           │   ├── CreateAdmissionCommand.cs
 │           │   ├── CreateAdmissionCommandHandler.cs
 │           │   ├── CreateAdmissionValidator.cs
 │           │   └── CreateAdmissionResponse.cs
-│           └── GetAdmissionById/
-│               ├── GetAdmissionByIdQuery.cs
-│               ├── GetAdmissionByIdQueryHandler.cs
-│               └── GetAdmissionByIdResponse.cs
+│           ├── GetAdmissionById/
+│           │   ├── GetAdmissionByIdQuery.cs
+│           │   ├── GetAdmissionByIdQueryHandler.cs
+│           │   └── GetAdmissionByIdResponse.cs
+│           └── GetAllAdmissions/
+│               ├── GetAllAdmissionsQuery.cs
+│               └── GetAllAdmissionsQueryHandler.cs
 ├── Infrastructure/                  # EF Core, Persistence
 │   └── Persistence/
 │       └── AppDbContext.cs         # EF Core context
@@ -127,13 +130,13 @@ VerticalSlice/
 ---
 
 ## API Endpoints
-
 ### Students
 
 | Method | Endpoint             | Description          | Request Body                                  |
 | ------ | -------------------- | -------------------- | --------------------------------------------- |
 | POST   | `/api/students`      | Create a new student | `{ firstName, lastName, email, dateOfBirth }` |
 | GET    | `/api/students/{id}` | Get student by ID    | —                                             |
+| GET    | `/api/students`      | Get all students     | —                                             |                                            |                                        |
 
 ### Courses
 
@@ -141,13 +144,15 @@ VerticalSlice/
 | ------ | ------------------- | ------------------- | -------------------------- |
 | POST   | `/api/courses`      | Create a new course | `{ title, code, credits }` |
 | GET    | `/api/courses/{id}` | Get course by ID    | —                          |
+| GET    | `/api/courses`      | Get all courses     | —                          |
 
 ### Admissions
 
 | Method | Endpoint               | Description                      | Request Body                               |
 | ------ | ---------------------- | -------------------------------- | ------------------------------------------ |
 | POST   | `/api/admissions`      | Create admission with courses    | `{ studentId, academicYear, courseIds[] }` |
-| GET    | `/api/admissions/{id}` | Get admission by ID with courses | —                                          |
+| GET    | `/api/admissions/{id}` | Get admission by ID with courses | —        
+| GET    | `/api/admissions`      | Get all admissions                | — |
 
 ---
 

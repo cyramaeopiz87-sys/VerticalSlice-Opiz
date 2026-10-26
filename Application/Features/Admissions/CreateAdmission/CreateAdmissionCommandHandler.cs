@@ -1,4 +1,4 @@
-namespace Application.Features.Admissions.CreateAdmission;
+    namespace Application.Features.Admissions.CreateAdmission;
 
 using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;

@@ -9,6 +9,8 @@ using Domain.Common;
 
 public static class StudentEndpoints
 {
+    private const string GetByIdRouteName = "GetStudentById";
+
     public static void MapStudentEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("/api/students")
@@ -23,7 +25,7 @@ public static class StudentEndpoints
             .WithSummary("Create a new student");
 
         group.MapGet("/{id:guid}", GetById)
-            .WithName("GetStudentById")
+            .WithName(GetByIdRouteName)
             .WithSummary("Get student by ID");
     }
 
@@ -33,6 +35,7 @@ public static class StudentEndpoints
     {
         var query = new GetAllStudentsQuery();
         var result = await handler.HandleAsync(query, cancellationToken);
+
         return result.IsSuccess
             ? TypedResults.Ok(result.Value)
             : result.ToProblemDetails();
@@ -44,8 +47,12 @@ public static class StudentEndpoints
         CancellationToken cancellationToken)
     {
         var result = await handler.HandleAsync(command, cancellationToken);
+
         return result.IsSuccess
-            ? TypedResults.CreatedAtRoute(result.Value, "GetStudentById", new { id = result.Value!.Id })
+            ? TypedResults.CreatedAtRoute(
+                result.Value,
+                GetByIdRouteName,
+                new { id = result.Value!.Id })
             : result.ToProblemDetails();
     }
 
@@ -56,6 +63,7 @@ public static class StudentEndpoints
     {
         var query = new GetStudentByIdQuery(id);
         var result = await handler.HandleAsync(query, cancellationToken);
+
         return result.IsSuccess
             ? TypedResults.Ok(result.Value)
             : result.ToProblemDetails();
