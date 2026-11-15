@@ -3,7 +3,9 @@ using Api.Features.Courses;
 using Api.Features.Students;
 using Application.Abstractions;
 using Api.Features.Auth;
+
 using Application.Features.Auth.Register;
+using Application.Features.Auth.Login;
 using Application.Abstractions.Data;
 using Application.Abstractions.Messaging;
 using Application.Features.Admissions.CreateAdmission;
@@ -12,6 +14,7 @@ using Application.Features.Admissions.GetAllAdmissions;
 using Application.Features.Courses.CreateCourse;
 using Application.Features.Courses.DeleteCourse;
 using Application.Features.Courses.GetAllCourses;
+
 using Application.Features.Courses.GetCourseById;
 using Application.Features.Courses.UpdateCourse;
 using Application.Features.Students.CreateStudent;
@@ -54,6 +57,9 @@ builder.Services.AddScoped<IQueryHandler<GetAllAdmissionsQuery, Result<GetAllAdm
 builder.Services.AddScoped<
     ICommandHandler<RegisterCommand, Result<RegisterResponse>>,
     RegisterCommandHandler>();
+builder.Services.AddScoped<
+    ICommandHandler<LoginCommand, Result<LoginResponse>>,
+    LoginCommandHandler>();
 
 builder.Services.AddScoped<
     ICommandHandler<UpdateCourseCommand, Result<UpdateCourseResponse>>,
