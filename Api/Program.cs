@@ -26,6 +26,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<IAppDbContext, AppDbContext>(options =>
     options.UseSqlite(
         builder.Configuration.GetConnectionString("Database")));
+// Password Hasher
+builder.Services.AddScoped<
+    Application.Abstractions.IPasswordHasher,
+    Infrastructure.Authentication.PasswordHasher>();
 // Validators
 builder.Services.AddValidatorsFromAssemblyContaining<CreateStudentValidator>();
 
